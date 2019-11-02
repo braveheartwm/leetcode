@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 using namespace std;
 /*
@@ -22,28 +23,41 @@ class MyStack {
 public:
     /** Initialize your data structure here. */
     MyStack() {
-        
+        // my_queue();
     }
     
     /** Push element x onto stack. */
     void push(int x) {
-        
+        queue<int> tmp;
+        tmp.push(x);
+        while(!my_queue.empty()) {
+            tmp.push(my_queue.front());
+            my_queue.pop();
+        }
+        while(!tmp.empty()) {
+            my_queue.push(tmp.front());
+            tmp.pop();
+        }
     }
     
     /** Removes the element on top of the stack and returns that element. */
     int pop() {
-        
+        int x = my_queue.front();
+        my_queue.pop();
+        return x;
     }
     
     /** Get the top element. */
     int top() {
-        
+        return my_queue.front();
     }
     
     /** Returns whether the stack is empty. */
     bool empty() {
-        
+        return my_queue.empty();
     }
+private:
+    queue<int> my_queue;
 };
 
 /**
@@ -57,6 +71,12 @@ public:
 
 int main()
 {
-    cout << "Hello LeetCode!!!" << endl;
+    MyStack* obj = new MyStack();
+    obj->push(1);
+    obj->push(2);
+    obj->push(3);
+    while (!obj->empty()) {
+        cout << obj->pop() << endl;
+    }
     return 0;
 }
