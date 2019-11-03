@@ -54,7 +54,7 @@ void MyStack<T>::push(T x) {
 template <class T>
 MyStack<T>::MyStack(int size) {
     this->size = size > 64 ? size : 64;
-    element = new T[size];
+    element = new T[this->size];
     len = 0;
 }
 
