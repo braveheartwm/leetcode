@@ -55,19 +55,30 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
 string intToRoman(int num)
 {
     string res;
-    string roman("MDCLXVI");
-    vector<int> value={1000,500,100,50,10,5,1};
+    vector<string> roman = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+    vector<int> value = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
     int i = 0;
-    while(num % value[i] == num) {
-        ++i;
+
+    while (num > 0)
+    {
+        if (num >= value[i])
+        {
+            int count = num / value[i];
+            num -= count*value[i];
+            for (int j = 0; j < count; ++j) {
+                res.append(roman[i]);
+            }
+        }
+        else
+        {
+            ++i;
+        }
     }
-    cout << i << " value=" << value[i] << endl;
     return res;
 }
 
 int main()
 {
-    cout << "Hello LeetCode!!!" << endl;
-    cout << intToRoman(994) << endl;
+    cout << intToRoman(4) << endl;
     return 0;
 }
